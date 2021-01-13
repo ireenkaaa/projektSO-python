@@ -1,31 +1,39 @@
 # from operator import itemgetter
 from SJF import SJFsort
-from queueCreator import createQueue
+from queueCreator import createQueue, numberOfProcesses, doProcess
 from dataGenerator import saveToFileAfter
 
-queue = []
-final = []
+queueFCFS = []
+#queueSJF = []
+finalFCFS = []
+#finalSJF = []
 timer = 0
-processTimer = 0
-processCounter = 0
+processTimerFCFS = 0
+processCounterFCFS = 0
+averageWaitingTimeFCFS = 0
+"""processTimerSJF = 0
+processCounterSJF = 0
+averageWaitingTimeSJF = 0
+"""
+while queueFCFS or processCounterFCFS < numberOfProcesses:
 
-
-while queue or not final:
-
-    processCounter = createQueue(queue, timer, processCounter)
-    SJFsort(queue)
-    print(queue)
-
-    if queue:
-        if processTimer == 0:
-            processTimer = queue[0][1]
-            queue[0][3] = (timer-queue[0][2])
-        print("aktualny proces: " + queue[0][0] + " czas do końca:" + str(processTimer))
-        processTimer -= 1
-        if processTimer == 0:
-            final.append(queue[0])
-            queue.pop(0)
-            # sorted(queue, key=lambda x: x[1])  # czy tak może być
+    processCounterFCFS = createQueue(queueFCFS, timer, processCounterFCFS)
+   # processCounterSJF = createQueue(queueSJF,timer,processCounterSJF)
+    #SJFsort(queueFCFS)
+    #print(queue)
+    processTimerFCFS = doProcess(queueFCFS ,processTimerFCFS,timer,finalFCFS)
+    #processTimerSJF=doProcess(queueSJF,processCounterSJF,timer,finalSJF)
 
     timer = timer + 1
-saveToFileAfter(final, "after")
+temp = 0
+
+"""for i in range(len(finalSJF)):
+    temp=temp+finalSJF[i][3]
+averageWaitingTime = temp/len(finalSJF)
+saveToFileAfter(finalSJF, averageWaitingTime,  "after")"""
+temp2=0
+
+for i in range(len(finalFCFS)):
+    temp2=temp2+finalFCFS[i][3]
+averageWaitingTime = temp/len(finalFCFS)
+saveToFileAfter(finalFCFS, averageWaitingTime,  "after")

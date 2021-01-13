@@ -5,13 +5,15 @@ def saveToFileBefore(list, name):
         for item in list:
             file.write("%s\n" % item)
 
-def saveToFileAfter(list, name):
+def saveToFileAfter(list, averageWaitingTime, name):
     with open(name, 'w') as file:
         file.write("Numer procesu   Czas trwania  Czas przyjscia  Czas oczekiwania \n")
         for item in list:
             for i in item:
                 file.write("%s              " % i)
             file.write("\n")
+        file.write("\n")
+        file.write("Średni czas oczekiwania to: "+ str(averageWaitingTime))
 
 def generateDataRandom(listTimes, listDuration, numberOfProcesses):
     for i in range(numberOfProcesses):
