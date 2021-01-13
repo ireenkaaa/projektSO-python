@@ -5,7 +5,11 @@ def saveToFileBefore(list, name):
         for item in list:
             file.write("%s\n" % item)
 
-def saveToFileAfter(list, averageWaitingTime, name):
+def saveToFileAfter(list, name):
+    temp = 0
+    for i in range(len(list)):
+        temp = temp + list[i][3]
+    averageWaitingTime = temp / len(list)
     with open(name, 'w') as file:
         file.write("Numer procesu   Czas trwania  Czas przyjscia  Czas oczekiwania \n")
         for item in list:

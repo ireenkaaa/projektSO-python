@@ -2,7 +2,7 @@ from dataGenerator import generateDataRandom, generateDataZero, saveToFileAfter
 
 timeList = []
 durationList = []
-numberOfProcesses = 4
+numberOfProcesses = 10
 
 generateDataRandom(timeList, durationList, numberOfProcesses)
 
@@ -26,7 +26,7 @@ def doProcess(queue, processTimer, timer, finalQueue):
         if processTimer == 0:
             processTimer = queue[0][1]
             queue[0][3] = (timer - queue[0][2])
-        #print("aktualny proces: " + queue[0][0] + " czas do końca:" + str(processTimer))
+        print("aktualny proces: " + queue[0][0] + " czas do końca:" + str(processTimer))
         processTimer -= 1
         if processTimer == 0:
             finalQueue.append(queue[0])
